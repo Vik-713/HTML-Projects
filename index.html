@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <button id="theme-toggle" class="theme-toggle">Switch to Light Theme</button>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -15,7 +16,6 @@
         <h2>Aspiring Web Developer</h2>
     </section>
 
-    <!-- About Me Section -->
     <section class="about">
         <h2>About Me</h2>
         <p>
@@ -23,7 +23,6 @@
         </p>
     </section>
 
-    <!-- Skills Section -->
     <section class="skills">
         <h2>Skills</h2>
         <ul>
@@ -34,7 +33,6 @@
         </ul>
     </section>
 
-    <!-- Projects Section -->
     <section class="projects">
         <h2>Projects</h2>
         <div class="project-container">
@@ -57,7 +55,6 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section class="contact">
         <h2>Contact Me</h2>
         <form>
@@ -68,5 +65,29 @@
         </form>
     </section>
 
+    <script>
+        const toggleButton = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        body.classList.add(savedTheme + '-theme');
+        updateButtonText(savedTheme);
+
+        toggleButton.addEventListener('click', () => {
+            if (body.classList.contains('dark-theme')) {
+                body.classList.replace('dark-theme', 'light-theme');
+                localStorage.setItem('theme', 'light');
+                updateButtonText('light');
+            } else {
+                body.classList.replace('light-theme', 'dark-theme');
+                localStorage.setItem('theme', 'dark');
+                updateButtonText('dark');
+            }
+        });
+
+        function updateButtonText(theme) {
+            toggleButton.textContent = theme === 'dark' ? 'Light Theme' : 'Dark Theme';
+        }
+    </script>
 </body>
 </html>
